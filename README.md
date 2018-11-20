@@ -1,3 +1,3 @@
 # speculator
 
-![picture](Users/fim/Desktop/finalplan.png)
+![picture](/img/finalplan.png)
