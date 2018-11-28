@@ -1,0 +1,42 @@
+<html>
+
+    <meta http-equiv="cache-control" content="max-age=0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <head>
+        <link rel="stylesheet" href="{{ url_for('bower.static', filename='bootstrap/dist/css/bootstrap.min.css') }}">
+
+          <title>Speculator</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <hr>
+
+            <!-- Add Flash messages  -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endwith %}
+
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+        <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ url_for('bower.static', filename='bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+    </body>
+</html>
