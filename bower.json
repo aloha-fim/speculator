@@ -1,0 +1,27 @@
+{
+  "name": "speculator",
+  "homepage": "https://github.com/fimhub/speculator",
+  "authors": [
+    "Adam Shapiro <adam.shapiro595@gmail.com>",
+    "Fred Im <frederec.im@gmail.com>",
+    "Matt Lopes <lopesmbcr@gmail.com>"
+  ],
+  "description": "Apply a neural network to find similar homes based on image recognition",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.1.3",
+    "popper.js": "^1.14.6",
+    "font-awesome": "^5.5.0",
+    "d3": "^5.7.0"
+  }
+}
