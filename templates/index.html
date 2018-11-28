@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<!-- if user in session  -->
+{% if username is defined %}
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+
+    <!-- Logout button -->
+    <form action="/logout" method="POST">
+        <button class='btn btn-primary active' type="submit"> Log out </button>
+    </form>
+
+    </div>
+</div>
+
+<!-- else  -->
+{% else %}
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+
+    <!-- Login button  -->
+    <form action="/login" method="GET">
+        <button class='btn btn-primary' type="submit"> Log in </button>
+    </form>
+
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+
+    <!-- Signup button  -->
+    <form action="/signup" method="GET">
+        <button class='btn btn-primary' type="submit"> Sign up </button>
+    </form>
+
+    </div>
+</div>
+
+<!-- end if  -->
+{% endif %}
+
+<script src="{{ url_for('bower.static', filename='d3/d3.js') }}"></script>
+{% endblock %}
