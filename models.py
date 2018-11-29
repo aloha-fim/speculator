@@ -14,7 +14,7 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 
 # Create class User
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
@@ -65,9 +65,9 @@ class Condo(db.Model):
 		house_num1 = db.Column(db.String, nullable=False)
 		house_num2 = db.Column(db.String, nullable=False)
 		sqft = db.Column(db.Integer, nullable=True)
-		photo_url = db.Column(db.String, nullable=False)
 		ppsf = db.Column(db.Float, nullable=True)
 		predicted_price = db.Column(db.Float, nullable=True)
+		photo_url = db.Column(db.String, nullable=False)
 
 		def __init__(self, mlsnum):
 			self.mlsnum = mlsnum
