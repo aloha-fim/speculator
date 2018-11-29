@@ -1,3 +1,7 @@
+#create user route
+#create post route
+
+
 import os
 from flask import Flask, flash, render_template, request, url_for, redirect, jsonify, session
 from flask_bower import Bower
