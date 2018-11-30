@@ -11,8 +11,8 @@ A parable on making full use of a team to make a great product:
 ```
 The easy way - "You do your thing. I will do my own thing. Let's meet up later"  "Okay"
 
-This method is acceptable if there is an initial investment made to integrate the implementation;
-create an API so that various software platforms can interact within the app.
+We are not risking the project with undefined requirements and minimal
+investment for integration (i.e. API backend to interact).
 ```
 
 ![alt text][logo] We are going into the rock tumbler instead: 
