@@ -1,4 +1,4 @@
-Boston condo comparison with Convolutional Neural Network (CNN)
+Boston condo compare with Convolutional Neural Network (CNN)
 ======
 ![picture](/img/finalplan.png)
 Teamwork
@@ -11,8 +11,8 @@ A parable on making full use of a team to make a great product:
 ```
 The easy way - "You do your thing. I will do my own thing. Let's meet up later"  "Okay"
 
-We are not risking the project with undefined requirements and minimal
-investment for integration (i.e. API backend to interact).
+We are not risking the project through undefined requirements and minimal
+investment (i.e. having no API backend to interact and integrate the app).
 ```
 
 ![alt text][logo] We are going into the rock tumbler instead: 
