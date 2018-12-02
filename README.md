@@ -1,5 +1,5 @@
-Boston condo compare with Convolutional Neural Network (CNN)
-======
+Condo Comparison with Convolutional Neural Network (CNN)
+===
 ![picture](/img/finalplan.png)
 Teamwork
 ---
