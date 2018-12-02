@@ -20,8 +20,8 @@ However, this does not mean we want to avoid difficult challenges.
 More of this - "See my classification system to identify beds, kithen, etc?"
 "Okay. Wait. No. Let's not train the model. Vector image output only."   
 
-We are focusing on how to make the best product possible, working on the code set together as a team, 
-to produce a more robust application.
+We are focused on working on the code set together as a team,
+to polish the application and make the best product possible.
 ```
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text"
 
