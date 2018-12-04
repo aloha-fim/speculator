@@ -1,6 +1,66 @@
 Condo Comparison with Convolutional Neural Network (CNN)
 ===
 ![picture](/img/finalplan.png)
+Database Schema
+---
+![picture](/img/schema.png)
+
+The database schema will be refined through completing use cases on the application implementation.
+
+USE CASE Example: Getting the User to Filter and Upload the Picture for Prediction
+---
+
+class models
+![picture](/img/model.png)
+
+PostgreSQL implementation to Example USE CASE
+
+```
+Table: public."Users"
+
+-- DROP TABLE public."Users";
+
+CREATE TABLE public."Users"
+(
+  uid integer NOT NULL DEFAULT nextval('"Users_uid_seq"'::regclass),
+  username character varying(255),
+  password character varying(255),
+  "createdAt" timestamp with time zone NOT NULL,
+
+  CONSTRAINT "Users_pkey" PRIMARY KEY (username)
+)
+WITH (
+  OIDS=FALSE
+);
+```
+
+```
+-- Table: public."Filters"
+
+-- DROP TABLE public."Filters";
+
+CREATE TABLE public."Filters"
+(
+  id integer NOT NULL DEFAULT nextval('"Filters_id_seq"'::regclass),
+  "beds" integer NOT NULL,
+  “baths” integer NOT NULL,
+  “zip” integer NOT NULL,
+  “photourl" character varying(255),
+  "createdAt" timestamp with time zone NOT NULL,
+  "username" character varying(255),
+
+  CONSTRAINT "Filters_pkey" PRIMARY KEY (id),
+  CONSTRAINT "Filters_username_fkey" FOREIGN KEY ("username")
+      REFERENCES public."Users" (username) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL
+)
+```
+
+
+
+
+
+
 Teamwork
 ---
 A parable on making full use of a team to make a great product:

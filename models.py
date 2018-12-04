@@ -19,29 +19,28 @@ class User(db.Model, UserMixin):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
+	  # connecting table Filter to a User table
+	  filters = db.relationship('Filter',backref='author',lazy=True)
 
-class Condo(db.Model):
+
+class Filter(db.Model):
 #Create the relationship to the User table
 #users = db.relationship(User)
-		__tablename__ = 'condos'
-		# Model for the Post on the site.
+		__tablename__ = 'filters'
+		#Create the relationship to the User table
+	  users = db.relationship(User)
+		# Model for the Filter on the site.
 		id = db.Column(db.Integer, autoincrement=True)
-		mlsnum = db.Column(db.Integer, primary_key=True, autoincrement=False)
-        list_price = db.Column(db.Integer, nullable=False)
 		zip = db.Column(db.Integer, nullable=False)
 		beds = db.Column(db.Integer, nullable=False)
 		baths = db.Column(db.Integer, nullable=False)
-		sqft = db.Column(db.Integer, nullable=True)photo_url = db.Column(db.String, nullable=False)
+		photourl = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
 
-		def __init__(self, mlsnum):
-			self.mlsnum = mlsnum
+
+		def __init__(self, id):
+			self.id = id
 
 		def __repr__(self):
-			return "Condo Id: {}".format(self.id)
+			return "Filter Id: {}".format(self.id)
 
-class Image(db.Model):
-    __tablename__ = 'images'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    mlsnum = db.Column(db.Integer, nullable=False)
-    imgnum = db.Column(db.Integer, nullable=False)
-    features = db.Column(db.Text, nullable=False)
