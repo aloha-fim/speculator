@@ -13,7 +13,7 @@ USE CASE Example: Getting the User to Filter and Upload the Picture for Predicti
 class models
 ![picture](/img/model.png)
 
-PostgreSQL implementation to Example USE CASE
+PostgreSQL implementation to USE CASE example:
 
 ```
 Table: public."Users"
@@ -89,20 +89,30 @@ to polish the application and make the best product possible.
 The Web Stack
 ---
 ![picture](/img/stack.png)
-
+We will focus on the Flask and Postgres components to the web stack.
+A user should be able to logon and upload an image in Flask.  
+The output in Flask will be 5 images from the database, derived by the CNN.
 
 The Neural Network 
 ---
 ![picture](/img/vgg.png)
+The CNN will use the pre-trained model VGG16 using Keras. 
+
+* Convolutions layers (i.e. 3*3 size)
+* Max pooling layers (i.e. 2*2 size)
+* Fully connected layers at end
+* Total 16 layers
 
 
 The Recommendation Method
 ---
 ![picture](/img/knn.png)
+The CNN will create an output value to all of the images.
+The recommendation system will take the input image and predict by KNN.
 
-Math behind implementation of K-Nearest Neighbor
+Math behind implementation of K-Nearest Neighbor (KNN)
 ---
 ![picture](/img/euclidmath.png)
-
+The prediction will output 5 images from the database based on KNN values.
 
 
