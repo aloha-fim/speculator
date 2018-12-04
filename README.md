@@ -58,7 +58,7 @@ CREATE TABLE public."Filters"
 )
 ```
 
-The next use case will be implement the favorites function to the application
+The next use case will be to implement the favorites function of the application
 ---
 
 class models to favorites USE CASE example
