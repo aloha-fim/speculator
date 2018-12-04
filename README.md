@@ -4,13 +4,14 @@ Condo Comparison with Convolutional Neural Network (CNN)
 Database Schema
 ---
 1. During the start of development all of the condo data elements will be put into one table.
+---
 ![picture](/img/condostable.png)
 
-USE CASE Example: Getting the User to Filter and Upload the Picture for Prediction
----
 
 2. The database schema will be refined by completing use cases on each implementation to the application.
+---
 
+USE CASE Example: Getting the User to Filter and Upload the Picture for Prediction
 
 class models to filter and upload USE CASE example
 ![picture](/img/model.png)
@@ -59,7 +60,7 @@ CREATE TABLE public."Filters"
 ```
 
 The next use case will be to implement the favorites function of the application
----
+
 
 class models to favorites USE CASE example
 ![picture](/img/followmodel.png)
@@ -71,9 +72,10 @@ As a result, the database schema can incrementally be refined one use case at a 
 ![picture](/img/followsschema.png)
 
 3. The final schema will adhere to 1NF, 2NF, 3NF, and BCNF (NF - normal form)
+---
 ![picture](/img/schema.png)
 
-Once all use cases have been completed will the database schema be able to finalize.
+Once all use cases have been completed will the finalized database schema be available.
 
 
 
