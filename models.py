@@ -16,8 +16,8 @@ db = SQLAlchemy()
 # Create class User
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(64), unique=True, nullable=False)
+    uid = db.Column(db.Integer, autoincrement=True)
+    username = db.Column(db.String(64), primary_key=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
 	  # connecting table Filter to a User table
 	  filters = db.relationship('Filter',backref='author',lazy=True)

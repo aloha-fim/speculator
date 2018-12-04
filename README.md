@@ -3,9 +3,10 @@ Condo Comparison with Convolutional Neural Network (CNN)
 ![picture](/img/finalplan.png)
 Database Schema
 ---
-![picture](/img/schema.png)
+![picture](/img/condostable.png)
+1. During the start of development all of the condo data elements will be put into one table.
 
-The database schema will be refined through completing use cases on the application implementation.
+2. The database schema will be refined by completing use cases on each implementation to the application.
 
 USE CASE Example: Getting the User to Filter and Upload the Picture for Prediction
 ---
@@ -56,7 +57,22 @@ CREATE TABLE public."Filters"
 )
 ```
 
+The next use case will be implement the favorites function to the application
+---
 
+class models
+![picture](/img/followmodel.png)
+
+Focusing from the perspective of the data stored in the database provides clarity on how the functions in the model should be called.   
+![picture](/img/followhow.png)
+
+As a result, the database schema can incrementally be refined one use case at a time.
+![picture](/img/followsschema.png)
+
+3. The final schema will adhere to 1NF, 2NF, 3NF, and BCNF (NF - normal form)
+![picture](/img/model.png)
+
+Once all use cases have been completed will the database schema be able to finalize.
 
 
 
@@ -89,30 +105,31 @@ to polish the application and make the best product possible.
 The Web Stack
 ---
 ![picture](/img/stack.png)
+
 We will focus on the Flask and Postgres components to the web stack.
 A user should be able to logon and upload an image in Flask.  
-The output in Flask will be 5 images from the database, derived by the CNN.
+The output in Flask will contain 5 images from the database, 
+which will be derived by prediction from the CNN.
 
 The Neural Network 
 ---
 ![picture](/img/vgg.png)
-The CNN will use the pre-trained model VGG16 using Keras. 
+
+The CNN will use the pre-trained model VGG16 for feature extraction through Keras. 
 
 * Convolutions layers (i.e. 3*3 size)
 * Max pooling layers (i.e. 2*2 size)
-* Fully connected layers at end
-* Total 16 layers
+* 16+ layers
 
 
 The Recommendation Method
 ---
 ![picture](/img/knn.png)
-The CNN will create an output value to all of the images.
-The recommendation system will take the input image and predict by KNN.
+As a basis for similarity search, the CNN collects features from the input image to enable the k-Nearest Neighbors (kNN) algorithm by classifying it against other images in the database.
 
-Math behind implementation of K-Nearest Neighbor (KNN)
+Math behind implementation of K-Nearest Neighbor
 ---
 ![picture](/img/euclidmath.png)
-The prediction will output 5 images from the database based on KNN values.
+The quality of the prediction will be based on the kNN values.  Other classification algorithms will be evaluated to improve the recommendation.
 
 
