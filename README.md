@@ -15,7 +15,7 @@ USE CASE Example: Getting the User to Filter and Upload the Picture for Predicti
 class models to filter and upload USE CASE example
 ![picture](/img/model.png)
 
-PostgreSQL implementation to USE CASE example:
+PostgreSQL implementation to filter and upload USE CASE example:
 
 ```
 Table: public."Users"
@@ -108,8 +108,7 @@ The Web Stack
 ![picture](/img/stack.png)
 
 We will focus on the Flask and Postgres components to the web stack.
-A user should be able to logon and upload an image in Flask.  
-The output in Flask will contain 5 images from the database, 
+A user should be able to logon and upload an image in Flask.  The output in Flask will contain 5 images from the database, 
 which will be derived by prediction from the CNN.
 
 The Neural Network 
