@@ -3,15 +3,16 @@ Condo Comparison with Convolutional Neural Network (CNN)
 ![picture](/img/finalplan.png)
 Database Schema
 ---
-![picture](/img/condostable.png)
 1. During the start of development all of the condo data elements will be put into one table.
-
-2. The database schema will be refined by completing use cases on each implementation to the application.
+![picture](/img/condostable.png)
 
 USE CASE Example: Getting the User to Filter and Upload the Picture for Prediction
 ---
 
-class models
+2. The database schema will be refined by completing use cases on each implementation to the application.
+
+
+class models to filter and upload USE CASE example
 ![picture](/img/model.png)
 
 PostgreSQL implementation to USE CASE example:
@@ -60,17 +61,17 @@ CREATE TABLE public."Filters"
 The next use case will be implement the favorites function to the application
 ---
 
-class models
+class models to favorites USE CASE example
 ![picture](/img/followmodel.png)
 
-Focusing from the perspective of the data stored in the database provides clarity on how the functions in the model should be called.   
+Focusing from the perspective of how the data is being stored in the database provides clarity on how the functions in the model should be called.   
 ![picture](/img/followhow.png)
 
 As a result, the database schema can incrementally be refined one use case at a time.
 ![picture](/img/followsschema.png)
 
 3. The final schema will adhere to 1NF, 2NF, 3NF, and BCNF (NF - normal form)
-![picture](/img/model.png)
+![picture](/img/schema.png)
 
 Once all use cases have been completed will the database schema be able to finalize.
 
@@ -113,6 +114,8 @@ which will be derived by prediction from the CNN.
 
 The Neural Network 
 ---
+Please refer to the Python Notebook to see how the CNN was implemented.
+
 ![picture](/img/vgg.png)
 
 The CNN will use the pre-trained model VGG16 for feature extraction through Keras. 
