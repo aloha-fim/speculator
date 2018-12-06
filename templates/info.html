@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ <section class="content-section">
+      <div class="container text-center">
+
+        <h1>Condo Details
+        <!-- if user likes the listing show "Your Favorite!"" --> 
+        </h1><br>
+
+
+      <div class="col-sm-6">  
+      <img class="img-thumbnail" src="{{ condo.photo_url }}" height="550" width="550"> <!-- define source --> 
+      </div>
+
+      <div class="col-sm-6 text-left">
+       
+        <!-- mls number, bedroom, bathroom, sqft, ppsf, listing price, predicted price --> 
+        <a>mlsnum: {{ condo.mlsnum }}</a>
+        <p>beds: {{ condo.beds }}</p>
+        <p>baths: {{ condo.baths }}</p>
+        <p>sqft: {{ condo.sqft }}</p>
+        <p>list price: {{ condo.list_price }}</p>
+
+
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+        <!-- if user in session --> 
+
+        <!-- if listing in favorite  --> 
+      {% if followed is defined %}
+
+      {% if followed %}
+      <div class="btn-group mr-2" role="group" aria-label="First group">  
+        <!-- remove from favorites button  --> 
+        <form action="/unlike/{{condo.mlsnum}}" method="POST">
+            <button type="submit"> UnFavorite </button> 
+          </form>
+      </div>
+
+      <!-- else  --> 
+      {% else %}
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
+      <!-- save to favorites button  --> 
+        <form action="/like/{{condo.mlsnum}}" method="POST">
+            <button type="submit"> Save to Favorites </button> 
+          </form>
+      </div>
+      
+      <!-- end if -->
+      {% endif %} 
+      {% endif %}
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+      <!-- favorites button --> 
+
+   <!--    <form action="/profile/{{session_username}}" method="POST">
+        <button type="submit"> Favorites</button> 
+      </form> -->
+
+      <form action="/favorite" method="POST">
+        <button type="submit"> Favorites</button> 
+      </form>
+
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+      <!-- home button -->
+        <a class="btn btn-primary" href="{{ url_for('index') }}" role="button">Home</a> 
+      </div>
+
+      </div>
+     </div>  
+    </div>
+  </div>
+</section>

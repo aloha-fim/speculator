@@ -21,6 +21,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 
 db.init_app(app)
 
+
+from models import db
+from flask import Flask, flash, render_template, request, url_for, redirect, session
+from models import Condo, User, Like
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -28,6 +34,73 @@ def index():
         return render_template('index.html', username=session['username'])
     else:
         return render_template('index.html')
+
+
+@app.route('/info/<mlsnum>', methods=['GET','POST'])
+def info(mlsnum):
+    condo = Condo.query.filter_by(mlsnum=mlsnum).first()
+
+    if "username" in session:
+        session_user = User.query.filter_by(username=session['username']).first()
+        if Like.query.filter_by(follower=session_user.id, following=condo.mlsnum).first():
+            followed = True
+        else:
+            followed = False
+        return render_template('info.html', condo=condo, session_username=session_user.username, followed=followed)
+    return render_template('info.html', condo=condo)
+
+# Profile route   
+
+@app.route('/favorite', methods=['POST','GET'])
+def favorite():
+    username_to_query = User.query.filter_by(username=session['username']).first()
+    return redirect(url_for('profilecondo', username=username_to_query.username)) 
+
+
+@app.route('/profilecondo/<username>', methods=['GET'])
+def profilecondo(username):
+
+    
+    if 'username' in session: 
+        session_user = User.query.filter_by(username=session['username']).first()
+        
+        # followers
+        users_followed = Like.query.filter_by(follower=session_user.id).all()
+        uids_followed = [f.following for f in users_followed]
+        followed_posts = Condo.query.filter(Condo.mlsnum.in_(uids_followed)).all()
+        
+        return render_template('profile.html', title='Home', condos=followed_posts, session_username=session_user.username)
+    else:
+        all_posts = Condo.query.all()
+        return render_template('profile.html', title='Home', condos=all_posts)
+
+
+
+
+@app.route('/like/<mlsnum>', methods=['POST','GET'])
+def follow(mlsnum):
+    session_user = User.query.filter_by(username=session['username']).first()
+    condo_to_follow = Condo.query.filter_by(mlsnum=mlsnum).first()
+
+    new_follow = Like(follower=session_user.id, following=condo_to_follow.mlsnum)
+
+    db.session.add(new_follow)
+    db.session.commit()
+    return redirect(url_for('info', mlsnum=mlsnum))
+
+
+@app.route('/unlike/<mlsnum>', methods=['POST','GET'])
+def unfollow(mlsnum):
+    session_user = User.query.filter_by(username=session['username']).first()
+    condo_to_unfollow = Condo.query.filter_by(mlsnum=mlsnum).first()
+    
+    delete_follow = Like.query.filter_by(follower=session_user.id, following=condo_to_unfollow.mlsnum).first()
+    db.session.delete(delete_follow)
+    db.session.commit()
+    return redirect(url_for('info', mlsnum=mlsnum))
+
+
+
 
 # signup route
 @app.route('/signup', methods=['GET', 'POST'])

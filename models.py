@@ -19,23 +19,26 @@ class User(db.Model, UserMixin):
     uid = db.Column(db.Integer, autoincrement=True)
     username = db.Column(db.String(64), primary_key=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-	  # connecting table Filter to a User table
-	  filters = db.relationship('Filter',backref='author',lazy=True)
+	  # connecting table Condo to a User table
+	  #condos = db.relationship('Condo',backref='author',lazy=True)
 
 
-class Filter(db.Model):
+class Condo(db.Model):
 #Create the relationship to the User table
 #users = db.relationship(User)
-		__tablename__ = 'filters'
+		__tablename__ = 'condos'
 		#Create the relationship to the User table
 	  users = db.relationship(User)
-		# Model for the Filter on the site.
+		# Model for the Condo on the site.
 		id = db.Column(db.Integer, autoincrement=True)
+		mlsnum = db.Column(db.Integer, primary_key=True, autoincrement=False)
+		list_price = db.Column(db.Integer, nullable=False)
 		zip = db.Column(db.Integer, nullable=False)
+		sqft = db.Column(db.Integer, nullable=False)
 		beds = db.Column(db.Integer, nullable=False)
 		baths = db.Column(db.Integer, nullable=False)
 		photourl = db.Column(db.String, nullable=False)
-    username = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
+    #username = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
 
 
 		def __init__(self, id):
@@ -43,4 +46,25 @@ class Filter(db.Model):
 
 		def __repr__(self):
 			return "Filter Id: {}".format(self.id)
+
+	  def is_following(self, condo):
+	  	return self.followed.filter(likes.c.following == condo.mlsnum).count() > 0
+
+	  def follow(self, condo):
+	  	if not self.is_following(condo):
+	  		self.followed.append(condo)
+
+	  def unfollow(self, condo):
+	  	if self.is_following(condo):
+	  		self.followed.remove(condo)
+
+
+class Like(db.Model):
+		#Create the relationship to the User table
+	#users = db.relationship(User)
+
+	__tablename__ = 'likes'
+	fid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	follower = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+	following = db.Column(db.Integer, db.ForeignKey('condos.mlsnum'), nullable=False)
 
