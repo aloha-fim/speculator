@@ -23,8 +23,40 @@ db.init_app(app)
 
 
 from models import db
-from flask import Flask, flash, render_template, request, url_for, redirect, session
+from flask import Flask, flash, render_template, request, url_for, redirect, session, jsonify
 from models import Condo, User, Like
+import base64
+import numpy as np 
+import io
+from PIL import Image
+import keras
+from keras import backend as K 
+from keras.models import Sequential
+from keras.models import load_model
+from keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import img_to_array
+
+
+#load model from keras into memory
+def get_model():
+    global model
+    model = load_model('VGG16.pkl')
+    print("pkl works")
+
+#function to accept PIL, python to format into keras model (numpy array)
+def preprocess_image(image, target_size):
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    image = image.resize(target_size)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    #format image into array for Keras
+    return image
+
+print(" Keras model loading")
+get_model
+
+
 
 
 @app.route('/')
@@ -36,7 +68,25 @@ def index():
         return render_template('index.html')
 
 
-@app.route('/info/<mlsnum>', methods=['GET','POST'])
+@app.route('/predict', methods=['GET','POST'])
+
+def predict():
+    message = request.get_json(force=True)
+    encoded = message['image']
+    decoded = base64.b64decode(encoded)
+    image = Image.open(io.BytesIO(decoded))
+    processed_image = preprocess_image(image, target_size=(224, 224))
+
+    prediction = model.predict(processed_image).tolist()
+
+    response = {
+        'prediction': {
+            'condo 1': prediction[0],
+            'condo 2': prediction[1]
+        }
+    }
+    return jsonify(response)
+
 def info(mlsnum):
     condo = Condo.query.filter_by(mlsnum=mlsnum).first()
 
