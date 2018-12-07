@@ -28,8 +28,8 @@ class Condo(db.Model):
 #users = db.relationship(User)
 		__tablename__ = 'condos'
 		#Create the relationship to the User table
-	  users = db.relationship(User)
-		# Model for the Condo on the site.
+		#users = db.relationship(User)
+	  # Model for the Condo on the site.
 		id = db.Column(db.Integer, autoincrement=True)
 		mlsnum = db.Column(db.Integer, primary_key=True, autoincrement=False)
 		list_price = db.Column(db.Integer, nullable=False)
@@ -47,20 +47,19 @@ class Condo(db.Model):
 		def __repr__(self):
 			return "Filter Id: {}".format(self.id)
 
-	  def is_following(self, condo):
-	  	return self.followed.filter(likes.c.following == condo.mlsnum).count() > 0
+		def is_following(self, condo):
+			return self.followed.filter(likes.c.following == condo.mlsnum).count() > 0
 
-	  def follow(self, condo):
-	  	if not self.is_following(condo):
-	  		self.followed.append(condo)
+		def follow(self, condo):
+			if not self.is_following(condo):
+				self.followed.append(condo)
 
-	  def unfollow(self, condo):
-	  	if self.is_following(condo):
-	  		self.followed.remove(condo)
-
+		def unfollow(self, condo):
+			if self.is_following(condo):
+				self.followed.remove(condo)
 
 class Like(db.Model):
-		#Create the relationship to the User table
+	#Create the relationship to the User table
 	#users = db.relationship(User)
 
 	__tablename__ = 'likes'
