@@ -8,7 +8,6 @@ from flask_bower import Bower
 from models import db, User
 from forms import LoginForm, SignupForm
 from passlib.hash import sha256_crypt
-from werkzeug.security import generate_password_hash,check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import requests
@@ -35,6 +34,7 @@ Migrate(app,db)
 from models import db
 from flask import Flask, flash, render_template, request, url_for, redirect, session, jsonify
 from models import Condo, User, Like
+from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash,check_password_hash
 import base64
 import numpy as np 
@@ -97,8 +97,8 @@ def predict():
 
     response = {
         'prediction': {
-            'condo 1': prediction[0][0],
-            'condo 2': prediction[0][1]
+            'condo': prediction[0],
+            'condo': prediction[1]
         }
     }
     return jsonify(response)
@@ -204,9 +204,9 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
-        if user is not None or user.check_password(form.password.data) :
+        if user is not None and user.check_password(form.password.data) :
             session['username'] = username
-            return redirect(url_for('predict'))
+            return redirect(url_for('prediction'))
 
             # If a user was trying to visit a page that requires a login
             # flask saves that URL as 'next'.
@@ -225,10 +225,13 @@ def login():
         return render_template('login.html', form=form)
 
 # logout route
-@app.route('/logout', methods=['POST'])
+@app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+
+
 
 
 if __name__ == "__main__":
