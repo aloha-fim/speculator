@@ -8,20 +8,28 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+
 
 
 db = SQLAlchemy()
 
 # Create class User
-class User(db.Model, UserMixin):
+class User(db.Model):
     __tablename__ = 'users'
-    uid = db.Column(db.Integer, autoincrement=True)
-    username = db.Column(db.String(64), primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(128), nullable=False)
-	  # connecting table Condo to a User table
-	  #condos = db.relationship('Condo',backref='author',lazy=True)
 
+    def __init__(self, username, password):
+    	self.username = username
+    	self.password = generate_password_hash(password)
+
+    def check_password(self,password):
+    	return check_password_hash(self.password,password)
+
+    def followed_posts(self):
+    	followed_posts = Condo.query.join(likes,(likes.c.following == Condo.mlsnum)).filter(likes.c.follower == self.id)
+    	return followed_posts
 
 class Condo(db.Model):
 #Create the relationship to the User table

@@ -8,23 +8,34 @@ from flask_bower import Bower
 from models import db, User
 from forms import LoginForm, SignupForm
 from passlib.hash import sha256_crypt
-
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+import requests
+import json
 
 app = Flask(__name__)
 app.secret_key = "cscie14a-speculator"
 
 Bower(app)
 
+# migration commands: flask db init, flask db migrate -m "msg", flask db upgrade
+
 # local postgresql or heroku postgresql
 db_url = os.environ.get('DATABASE_URL', 'postgresql://localhost/speculator_db')
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+db = SQLAlchemy(app)
+Migrate(app,db)
+
 
 
 from models import db
 from flask import Flask, flash, render_template, request, url_for, redirect, session, jsonify
 from models import Condo, User, Like
+from werkzeug.security import generate_password_hash,check_password_hash
 import base64
 import numpy as np 
 import io
@@ -68,7 +79,12 @@ def index():
         return render_template('index.html')
 
 
-@app.route('/predict', methods=['GET','POST'])
+@app.route('/prediction', methods=['GET','POST'])
+def prediction():
+    if 'username' in session:
+        return render_template('info.html', username=session['username'])
+    else:
+        return render_template('index.html')
 
 def predict():
     message = request.get_json(force=True)
@@ -81,8 +97,8 @@ def predict():
 
     response = {
         'prediction': {
-            'condo 1': prediction[0],
-            'condo 2': prediction[1]
+            'condo 1': prediction[0][0],
+            'condo 2': prediction[0][1]
         }
     }
     return jsonify(response)
@@ -169,12 +185,12 @@ def signup():
             flash('Your password confirmation is incorrect. Make sure you wrote the same password twice.')
             return redirect(url_for('signup'))
         else:
-            user = User(username=username, password=sha256_crypt.hash(password))
+            user = User(username=username, password=password)
             db.session.add(user)
             db.session.commit()
             flash('Congratulations, you are now a registered user!')
             session['username'] = username
-            return redirect(url_for('index'))
+            return redirect(url_for('predict'))
     else:
         return render_template('signup.html', form=form)
 
@@ -188,12 +204,22 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
-        if user is None or not sha256_crypt.verify(password, user.password):
+        if user is not None or user.check_password(form.password.data) :
+            session['username'] = username
+            return redirect(url_for('predict'))
+
+            # If a user was trying to visit a page that requires a login
+            # flask saves that URL as 'next'.
+            next = request.args.get('next')
+
+            # Check if that next exists, otherwise go to the welcome page.
+            if next == None or not next[0]=='/':
+                next = url_for('users.index')
+
+            return redirect(next)
+        else:
             flash('Invalid username or password')
             return redirect(url_for('login'))
-        else:
-            session['username'] = username
-            return redirect(url_for('index'))
 
     else:
         return render_template('login.html', form=form)
