@@ -145,3 +145,18 @@ Favorites Functionality
 ![picture](/img/favorites_function.png)
 
 
+Remaining
+---
+There are few challenges we want to perform within 7 days time.
+
+| Function      | Cool           
+| ------------- |:------------------:
+| cloud         | sagemaker - AWS 
+| optimization  | log function      
+| optimization  | XGboost   
+
+We will try to create a recommendation system to DOM (days on market), incorporating all of the cool implementations to the webapp.
+
+
+
+
