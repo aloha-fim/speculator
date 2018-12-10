@@ -114,7 +114,7 @@ which will be derived by prediction from the CNN.
 
 The Neural Network 
 ---
-Please refer to the Python Notebook to see how the CNN was implemented.
+* implementation of the CNN included within the python notebook.
 
 ![picture](/img/vgg.png)
 
@@ -134,5 +134,12 @@ Math behind implementation of K-Nearest Neighbor
 ---
 ![picture](/img/euclidmath.png)
 The quality of the prediction will be based on the kNN values.  Other classification algorithms will be evaluated to improve the recommendation.
+
+Process Flow
+---
+![picture](/img/process_flows.png)
+
+
+
 
 

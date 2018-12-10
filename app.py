@@ -51,8 +51,8 @@ from keras.preprocessing.image import img_to_array
 #load model from keras into memory
 def get_model():
     global model
-    model = load_model('VGG16.pkl')
-    print("pkl works")
+    model = load_model('VGG16.h5')
+    print("h5 works")
 
 #function to accept PIL, python to format into keras model (numpy array)
 def preprocess_image(image, target_size):
