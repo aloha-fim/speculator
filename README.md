@@ -140,6 +140,8 @@ Process Flow
 ![picture](/img/process_flows.png)
 
 
-
+Favorites Functionality
+---
+![picture](/img/favorites_function.png)
 
 
