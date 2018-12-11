@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+  {% block content %}
+
+    <section class="content-section">
+        <div class="container text-center">
+
+      <!-- if user in session -->
+      {% if username is defined %}
+          <div class="row">
+
+          <h1>{{ username }}'s Favorites</h1>
+
+          <!-- Home button  -->
+          <form action="/index" method="GET">
+              <button class='btn btn-primary active' type="submit"> Home </button>
+          </form>
+
+        </div>
+        <br>
+
+        <!-- for every listing in favorites  -->
+        {% for condo in favorites %}
+
+          <div class="row">
+            <div class="col-sm-3">
+              </div>
+
+              <div class="col-sm-3">
+              <img width=200 height=200 class="img-thumbnail" src="{{ condo.photourl }}">
+              </div>
+
+              <div class="col-sm-6 text-left">
+                 <h4> MLS number: {{ condo.mlsnum }}</h4>
+                  <p>Beds Number: {{ condo.beds }}<br>
+                  Baths Number: {{ condo.baths }}<br>
+                  Listing Price: ${{ condo.listprice }} </p>
+
+                  <!-- Remove Button -->
+                  <form action="/unlike/{{ condo.mlsnum }}" method="POST">
+                      <input type="hidden" name="redirect" value="profile">
+                      <button class='btn btn-warning' type="submit"> Remove </button>
+                  </form>
+
+              </div>
+          </div>
+
+        <!-- end for -->
+        {% endfor %}
+        <!-- end if -->
+        {% endif %}
+
+      </div>
+  </section>
+{% endblock %}
