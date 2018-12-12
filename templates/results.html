@@ -1,25 +1,9 @@
 {% extends "layout.html" %}
-  {% block content %}
+{% block content %}
 
-    <section class="content-section">
-        <div class="container text-center">
-
-      <!-- if user in session -->
-      {% if username is defined %}
-          <div class="row">
-
-          <h1>{{ username }}'s Favorites</h1>
-
-          <!-- Home button  -->
-          <form action="/index" method="GET">
-              <button class='btn btn-primary active' type="submit"> Home </button>
-          </form>
-
-        </div>
-        <br>
-
-        <!-- for every listing in favorites  -->
-        {% for condo in favorites %}
+<section class="content-section">
+    <div class="container text-center">
+        {% for condo in closest %}
 
           <div class="row">
             <div class="col-sm-3">
@@ -36,19 +20,16 @@
                   Listing Price: ${{ condo.listprice }} </p>
 
                   <!-- Remove Button -->
-                  <form action="/unlike/{{ condo.mlsnum }}" method="POST">
+                  <!-- <form action="/unlike/{{ condo.mlsnum }}" method="POST">
                       <input type="hidden" name="redirect" value="profile">
                       <button class='btn btn-warning' type="submit"> Remove </button>
-                  </form>
+                  </form> -->
 
               </div>
           </div>
 
-        <!-- end for -->
         {% endfor %}
-        <!-- end if -->
-        {% endif %}
+    </div>
+</section>
 
-      </div>
-  </section>
 {% endblock %}
