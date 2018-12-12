@@ -17,3 +17,4 @@ for idx, c in df_condos.iterrows():
 
 cur.close()
 conn.close()
+
