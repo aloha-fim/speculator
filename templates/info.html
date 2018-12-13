@@ -1,65 +1,51 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<ul class="nav">
-    {% if username is defined %}
-    <li class="nav-link"><a href="{{ url_for('logout') }}">Log Out</a></li>
-    {% else %}
-    <li class="nav-link"><a href="{{ url_for('login') }}">Log In</a></li>
-    <li class="nav-link"><a href="{{ url_for('signup') }}">Sign Up</a></li>
-    {% endif %}
-</ul>
-
-<br>
-<br>
-<br>
-
-<body>
 <div id="container">
     <form action="/search" method="post" enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group col">
                 <label for="bedsMin">Minimum # of Beds</label>
-                <input type="number" name="bedsMin" min="0" max="5" value="0" step="1">
+                <input class="form-control" type="number" name="bedsMin" min="0" max="5" value="0" step="1">
             </div>
             <div class="form-group col">
                 <label for="bedsMax">Max # of Beds</label>
-                <input type="number" name="bedsMax" min="0" max="5" value="5" step="1">
+                <input class="form-control" type="number" name="bedsMax" min="0" max="5" value="5" step="1">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
                 <label for="bathsMin">Minimum # of Baths</label>
-                <input type="number" name="bathsMin" min="0" max="5" value="0" step="0.5">
+                <input class="form-control" type="number" name="bathsMin" min="0" max="5" value="0" step="0.5">
             </div>
             <div class="form-group col">
                 <label for="bathsMax">Max # of Baths</label>
-                <input type="number" name="bathsMax" min="0" max="5" value="5" step="0.5">
+                <input class="form-control" type="number" name="bathsMax" min="0" max="5" value="5" step="0.5">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
                 <label for="sqftMin">Minimum Square Feet</label>
-                <input type="number" name="sqftMin" min="0" max="2000">
+                <input class="form-control" type="number" name="sqftMin" min="0" max="2000">
             </div>
             <div class="form-group col">
                 <label for="sqftMax">Max Square Feet</label>
-                <input type="number" name="sqftMax" min="0" max="2000">
+                <input class="form-control" type="number" name="sqftMax" min="0" max="2000">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col">
                 <label for="priceMin">Minimum List Price</label>
-                <input type="number" name="priceMin" min="0" max="2000000">
+                <input class="form-control" type="number" name="priceMin" min="0" max="2000000">
             </div>
             <div class="form-group col">
                 <label for="priceMax">Max List Price</label>
-                <input type="number" name="priceMax" min="0" max="2000000">
+                <input class="form-control" type="number" name="priceMax" min="0" max="2000000">
             </div>
         </div>
         <div class="form-group">
             <label for="inputZip">Zip Code</label>
-            <input type="text" name="inputZip" pattern="[0-9]{5}">
+            <input class="form-control" type="text" name="inputZip" pattern="[0-9]{5}">
         </div>
         <div class="form-group">
             <label for="photo">Photo</label>
@@ -67,9 +53,7 @@
         </div>
         <button type="submit" class="btn btn-lg btn-primary">Search</button>
     </form>
-</body>
+</div>
 
 
 {% endblock %}
-
-

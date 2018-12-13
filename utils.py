@@ -3,11 +3,31 @@ from numpy.linalg import norm
 from ast import literal_eval
 from operator import itemgetter
 
+from keras.preprocessing import image
+from keras.applications.vgg16 import VGG16
+from keras.applications.vgg16 import preprocess_input
+import tensorflow as tf
+
+global graph
+graph = tf.get_default_graph()
+
+model = VGG16(weights='imagenet', include_top=False)
+
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def processPhoto(photo):
+    img = image.load_img(photo, target_size=(224,224))
+    img_data = image.img_to_array(img)
+    img_data = np.expand_dims(img_data, axis=0)
+    img_data = preprocess_input(img_data)
+
+    with graph.as_default():
+        features = model.predict(img_data)
+    return features
 
 # convert each dict of values back into an ndarray
 def fromZeroes(data):
@@ -23,6 +43,7 @@ def fromZeroes(data):
     return narray
 
 def findClosest(photo, iarray):
+    photo = processPhoto(photo)
     closest = []
     for image in iarray:
         comparison = {
