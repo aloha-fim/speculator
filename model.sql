@@ -30,3 +30,13 @@ CREATE TABLE photos (
     imgnum integer NOT NULL,
     features text NOT NULL
 );
+
+
+DROP TABLE IF EXISTS likes;
+CREATE TABLE likes (
+	lid serial NOT NULL PRIMARY KEY,
+    liker integer NOT NULL, 
+    liked integer NOT NULL,
+    FOREIGN KEY (liker) REFERENCES users(uid),
+    FOREIGN KEY (liked) REFERENCES condos(cid)
+);
