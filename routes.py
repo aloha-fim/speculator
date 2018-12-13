@@ -63,7 +63,7 @@ def search():
         filter(Condo.baths.between(form['bathsMin'], form['bathsMax']))
     if form['sqftMin'] and form['sqftMax']:
         filtered = filtered.filter(Condo.sqft.between(form['sqftMin'], form['sqftMax']))
-    if form['priceMin'] and form['prceMax']:
+    if form['priceMin'] and form['priceMax']:
         filtered = filtered.filter(Condo.listprice.between(form['priceMin'], form['priceMax']))
     if 'zip' in form:
         filtered = filtered.filter(Condo.zip==form['zip'])
