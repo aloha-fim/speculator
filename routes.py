@@ -24,8 +24,8 @@ db.init_app(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    if 'username' in session:
-        return redirect(url_for('info'))
+    if 'username' in session:  # return redirect(url_for('info'))
+        return render_template('index.html', username=session['username'])
     else:
         return render_template('index.html')
 

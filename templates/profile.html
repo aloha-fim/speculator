@@ -1,21 +1,32 @@
 {% extends "layout.html" %}
   {% block content %}
 
+
+        <ul class="nav">
+            {% if username is defined %}
+                <li class="nav-link"><a href="{{ url_for('info') }}">Activate</a></li>
+                <li class="nav-link"><a href="{{ url_for('logout') }}">Log Out</a></li>
+            {% else %}
+                <li class="nav-link"><a href="{{ url_for('login') }}">Log In</a></li>
+                <li class="nav-link"><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+
     <section class="content-section">
         <div class="container text-center">
 
       <!-- if user in session -->
-      {% if username is defined %}
+<!--       {% if username is defined %}
           <div class="row">
 
           <h1>{{ username }}'s Favorites</h1>
 
           <!-- Home button  -->
-          <form action="/index" method="GET">
+        <!--   <form action="/index" method="GET">
               <button class='btn btn-primary active' type="submit"> Home </button>
           </form>
 
-        </div>
+        </div> --> 
         <br>
 
         <!-- for every listing in favorites  -->
