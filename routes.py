@@ -127,10 +127,12 @@ def login():
         return render_template('login.html', form=form)
 
 # logout route
-@app.route('/logout', methods=['POST'])
+# @app.route('/logout', methods=['POST'])
+@app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 
 if __name__ == "__main__":
