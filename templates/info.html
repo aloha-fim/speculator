@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+</head>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('info') }}">Speculator</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
@@ -19,55 +23,54 @@
     </div>
 </nav>
 
-<h2>Filter and Search</h2>
-
-
 <div id="container">
-    <form action="/search" method="post" enctype="multipart/form-data">
+    <h1>Filter and Search</h1>
+
+    <form action="/search" method="post" enctype="multipart/form-data" id="searchForm">
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="bedsMin">Minimum # of Beds</label>
-                <input class="form-control" type="number" name="bedsMin" min="0" max="5" value="0" step="1">
+                <input class="form-control" type="number" name="bedsMin" min="0" max="6" value="0" step="1">
             </div>
             <div class="form-group col-md-3">
                 <label for="bedsMax">Max # of Beds</label>
-                <input class="form-control" type="number" name="bedsMax" min="0" max="5" value="5" step="1">
+                <input class="form-control" type="number" name="bedsMax" min="0" max="6" value="6" step="1">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="bathsMin">Minimum # of Baths</label>
-                <input class="form-control" type="number" name="bathsMin" min="0" max="5" value="0" step="0.5">
+                <input class="form-control" type="number" name="bathsMin" min="0" max="7" value="0" step="0.5">
             </div>
             <div class="form-group col-md-3">
                 <label for="bathsMax">Max # of Baths</label>
-                <input class="form-control" type="number" name="bathsMax" min="0" max="5" value="5" step="0.5">
+                <input class="form-control" type="number" name="bathsMax" min="0" max="7" value="7" step="0.5">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="sqftMin">Minimum Square Feet</label>
-                <input class="form-control" type="number" name="sqftMin" min="0" max="2000">
+                <input class="form-control" type="number" name="sqftMin" min="0" max="6500">
             </div>
             <div class="form-group col-md-3">
                 <label for="sqftMax">Max Square Feet</label>
-                <input class="form-control" type="number" name="sqftMax" min="0" max="2000">
+                <input class="form-control" type="number" name="sqftMax" min="0" max="6500">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="priceMin">Minimum List Price</label>
-                <input class="form-control" type="number" name="priceMin" min="0" max="2000000">
+                <input class="form-control" type="number" name="priceMin" min="0" max="15000000">
             </div>
             <div class="form-group col-md-3">
                 <label for="priceMax">Max List Price</label>
-                <input class="form-control" type="number" name="priceMax" min="0" max="2000000">
+                <input class="form-control" type="number" name="priceMax" min="0" max="15000000">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="inputZip">Zip Code</label>
-                <input class="form-control" type="text" name="inputZip" pattern="[0-9]{5}">
+                <input class="form-control" type="text" name="inputZip" pattern="[0-9]{5}" title="Five digit zip code">
             </div>
         </div>
         <div class="form-group">
@@ -78,5 +81,11 @@
     </form>
 </div>
 
+<div id="loadDiv">
+    <div class="loader mx-auto"></div>
+    <h4 class="text-center">This may take some time. Please wait...</h4>
+</div>
+
+<script src="{{ url_for('static', filename='js/info.js')}}"></script>
 
 {% endblock %}

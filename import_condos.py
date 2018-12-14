@@ -4,7 +4,7 @@ import pandas as pd
 conn = psycopg2.connect("host=localhost dbname=speculator_db user=postgres")
 cur = conn.cursor()
 
-df_condos = pd.read_csv("static/data/condos.csv", index_col=False)
+df_condos = pd.read_csv("static/data/condos.csv", index_col=False, dtype={'ZIP': str})
 for idx, c in df_condos.iterrows():
     try:
         cur.execute(
@@ -17,4 +17,3 @@ for idx, c in df_condos.iterrows():
 
 cur.close()
 conn.close()
-

@@ -11,7 +11,10 @@
     <head>
         <link rel="stylesheet" href="{{ url_for('bower.static', filename='bootstrap/dist/css/bootstrap.min.css') }}">
 
-          <title>Speculator</title>
+        <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ url_for('bower.static', filename='bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+        <title>Speculator</title>
     </head>
 
     <body>
@@ -45,9 +48,6 @@
             {% endblock %}
 
         </div>
-
-        <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ url_for('bower.static', filename='bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
     </body>
 </html>

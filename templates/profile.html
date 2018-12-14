@@ -22,9 +22,10 @@
     <section class="content-section">
         <div class="container text-center">
 
-            <h2>Favorites</h2>
+            <h1>Favorites</h1>
 
         <!-- for every listing in favorites  -->
+        {% if favorites|length > 0 %}
         {% for condo in favorites %}
 
           <div class="row mb-3">
@@ -52,6 +53,10 @@
 
         <!-- end for -->
         {% endfor %}
+        {% else %}
+            <h3>You don't have any favorites at the moment.</h3>
+        {% endif %}
+
 
       </div>
   </section>

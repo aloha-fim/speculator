@@ -21,7 +21,8 @@
 
 <section class="content-section">
     <div class="container text-center">
-        <h2>Results</h2>
+        <h1>Results</h1>
+        {% if condos|length > 0 %}
         {% for condo in condos %}
 
           <div class="row mb-3">
@@ -59,6 +60,10 @@
           </div>
 
         {% endfor %}
+        {% else %}
+            <h3>No results found. Please try different filters.</h3>
+        {% endif %}
+
     </div>
 </section>
 

@@ -41,7 +41,8 @@ def info():
 def profile():
     if 'username' in session:
         user = User.query.filter_by(username=session['username']).first()
-        return render_template('profile.html', username=user.username, favorites=user.likes)
+        favorites = user.likes.all()
+        return render_template('profile.html', username=user.username, favorites=favorites)
     else:
         flash('You must be logged in to view your profile.')
         return redirect('index')
@@ -59,15 +60,29 @@ def search():
         return redirect(url_for('index'))
 
     form = request.form
-    filtered = Condo.query.filter(Condo.beds.between(form['bedsMin'], form['bedsMax'])).\
-        filter(Condo.baths.between(form['bathsMin'], form['bathsMax']))
-    if form['sqftMin'] and form['sqftMax']:
-        filtered = filtered.filter(Condo.sqft.between(form['sqftMin'], form['sqftMax']))
-    if form['priceMin'] and form['priceMax']:
-        filtered = filtered.filter(Condo.listprice.between(form['priceMin'], form['priceMax']))
-    if 'zip' in form:
-        filtered = filtered.filter(Condo.zip==form['zip'])
-    mlsnums = [condo.mlsnum for condo in filtered.limit(50).all()]
+    filtered = Condo.query
+
+    bedsMin = form['bedsMin']
+    bedsMax = form['bedsMax']
+    bathsMin = form['bathsMin']
+    bathsMax = form['bathsMax']
+    sqftMin = form['sqftMin']
+    sqftMax = form['sqftMax']
+    priceMin = form['priceMin']
+    priceMax = form['priceMax']
+    inputZip = form['inputZip']
+
+    if bedsMin <= bedsMax:
+        filtered = filtered.filter(Condo.beds.between(bedsMin, bedsMax))
+    if bathsMin <= bathsMax:
+        filtered = filtered.filter(Condo.baths.between(bathsMin, bathsMax))
+    if type(sqftMin) is int and type(sqftMax) is int and sqftMin <= sqftMax:
+        filtered = filtered.filter(Condo.sqft.between(sqftMin, sqftMax))
+    if type(priceMin) is int and type(priceMax) is int and priceMin <= priceMax:
+        filtered = filtered.filter(Condo.listprice.between(priceMin, priceMax))
+    if inputZip:
+        filtered = filtered.filter(Condo.zip==inputZip)
+    mlsnums = [condo.mlsnum for condo in filtered.limit(200).all()]
 
     images = Photo.query.filter(Photo.mlsnum.in_(mlsnums)).all()
 
@@ -81,9 +96,9 @@ def search():
 def results():
     if not 'closest' in session:
         return redirect(url_for('info'))
-        
+
     closest = session['closest']
-    condos = Condo.query.filter(Condo.mlsnum.in_(closest))
+    condos = Condo.query.filter(Condo.mlsnum.in_(closest)).all()
 
     if 'username' in session:
         user = User.query.filter_by(username=session['username']).first()
