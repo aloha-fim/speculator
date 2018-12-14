@@ -1,23 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
 
-        <ul class="nav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('info') }}">Speculator</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
             {% if username is defined %}
-                <li class="nav-link"><a href="{{ url_for('profile') }}">Profile</a></li>
-                <li class="nav-link"><a href="{{ url_for('info') }}">Activate</a></li>
-                <li class="nav-link"><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
-                <li class="nav-link"><a href="{{ url_for('login') }}">Log In</a></li>
-                <li class="nav-link"><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log In</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a></li>
             {% endif %}
         </ul>
-
+    </div>
+</nav>
 
 <section class="content-section">
     <div class="container text-center">
-        {% for condo in closest %}
+        <h2>Results</h2>
+        {% for condo in condos %}
 
-          <div class="row">
+          <div class="row mb-3">
             <div class="col-sm-3">
               </div>
 
@@ -31,11 +38,22 @@
                   Baths Number: {{ condo.baths }}<br>
                   Listing Price: ${{ condo.listprice }} </p>
 
-                  <!-- Remove Button -->
-                  <!-- <form action="/unlike/{{ condo.mlsnum }}" method="POST">
-                      <input type="hidden" name="redirect" value="profile">
-                      <button class='btn btn-warning' type="submit"> Remove </button>
-                  </form> -->
+                  {% if username is defined %}
+                  {% if condo in favorites %}
+
+                  <form action="/unlike/{{ condo.mlsnum }}" method="POST">
+                      <input type="hidden" name="redirect" value="results">
+                      <button class='btn btn-warning' type="submit"> Remove From Favorites </button>
+                  </form>
+
+                  {% else %}
+
+                  <form action="/like/{{ condo.mlsnum }}" method="POST">
+                      <button class='btn btn-primary active' type="submit"> Save to Favorites </button>
+                  </form>
+
+                  {% endif %}
+                  {% endif %}
 
               </div>
           </div>

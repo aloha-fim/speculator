@@ -30,13 +30,14 @@
 
             <!-- Add Flash messages  -->
             {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <ul class=flashes>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
             {% endwith %}
 
 
@@ -50,4 +51,3 @@
 
     </body>
 </html>
-

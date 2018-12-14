@@ -24,8 +24,8 @@ db.init_app(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    if 'username' in session:  # return redirect(url_for('info'))
-        return render_template('index.html', username=session['username'])
+    if 'username' in session:
+        return redirect(url_for('info'))
     else:
         return render_template('index.html')
 
@@ -72,13 +72,44 @@ def search():
     images = Photo.query.filter(Photo.mlsnum.in_(mlsnums)).all()
 
     closest = findClosest(photo, images)
-    condos = filtered.filter(Condo.mlsnum.in_(closest))
+    session['closest'] = closest
 
     # we have no reason to save uploaded images
+    return redirect(url_for('results'))
+
+@app.route('/results')
+def results():
+    if not 'closest' in session:
+        return redirect(url_for('info'))
+        
+    closest = session['closest']
+    condos = Condo.query.filter(Condo.mlsnum.in_(closest))
+
     if 'username' in session:
-        return render_template('results.html', username=session['username'], closest=condos)
+        user = User.query.filter_by(username=session['username']).first()
+        return render_template('results.html', condos=condos, username=user.username, favorites=user.likes)
     else:
-        return render_template('results.html', closest=condos)
+        return render_template('results.html', condos=condos)
+
+
+# like route
+@app.route('/like/<mlsnum>', methods=['POST'])
+def like(mlsnum):
+    user = User.query.filter_by(username=session['username']).first()
+    condo = Condo.query.filter_by(mlsnum=mlsnum).first()
+    user.like(condo)
+    return redirect(url_for('results'))
+
+# unlike route
+@app.route('/unlike/<mlsnum>', methods=['POST'])
+def unlike(mlsnum):
+    user = User.query.filter_by(username=session['username']).first()
+    condo = Condo.query.filter_by(mlsnum=mlsnum).first()
+    user.unlike(condo)
+    if request.form['redirect'] == 'profile':
+        return redirect(url_for('profile'))
+    else:
+        return redirect(url_for('results'))
 
 # signup route
 @app.route('/signup', methods=['GET', 'POST'])
