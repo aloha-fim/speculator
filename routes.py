@@ -29,6 +29,13 @@ def index():
     else:
         return render_template('index.html')
 
+@app.route('/about')
+def about():
+    if 'username' in session:
+        return render_template('about.html', username=session['username'])
+    else:
+        return render_template('about.html')
+     
 @app.route('/info')
 def info():
     if 'username' in session:
