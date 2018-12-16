@@ -35,7 +35,7 @@ def about():
         return render_template('about.html', username=session['username'])
     else:
         return render_template('about.html')
-     
+
 @app.route('/info')
 def info():
     if 'username' in session:
@@ -89,7 +89,7 @@ def search():
         filtered = filtered.filter(Condo.listprice.between(priceMin, priceMax))
     if inputZip:
         filtered = filtered.filter(Condo.zip==inputZip)
-    mlsnums = [condo.mlsnum for condo in filtered.limit(200).all()]
+    mlsnums = [condo.mlsnum for condo in filtered.limit(50).all()]
 
     images = Photo.query.filter(Photo.mlsnum.in_(mlsnums)).all()
 
