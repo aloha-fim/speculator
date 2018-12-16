@@ -102,7 +102,6 @@
         </div>
       </div>
     </section>
-
     <section class="features" id="features">
       <div class="container">
         <div class="section-heading text-center">
@@ -155,7 +154,7 @@ Given the time frame of the project, Jasmine and Michelle recommended that we no
                     <h3>Final Design
                     <i class="icon-lock-open text-primary"></i>
                     Pretained CNN</h3>
-                    <p class="text-muted">Ultimately, we decided to use Keras and the pretrained model of VGG16.  In addition, the prediction method of the pre-traimed model uses an algorithm in the numpy library to match similar objects by euclidian distance.  The lesson learned that is more training data is required for more training iterations and weight updates, in order to make better predictions in the network.
+                    <p class="text-muted">Ultimately, we decided to use Keras and the pretrained model of VGG16.  In addition, the prediction method of the pre-trained model uses an algorithm in the numpy library to match similar objects by euclidian distance.  The lesson learned that is more training data is required for more training iterations and weight updates, in order to make better predictions in the network.
 </p>
               <!--     </div> -->
                 </div>
@@ -183,30 +182,67 @@ Given the time frame of the project, Jasmine and Michelle recommended that we no
             </div>
           </div>
         </div>
+        <br>
+        <br>
+
+          <div class="col-md-8 mx-auto">
+            <div class="section-heading text-center">
+              <h2>Project Plan</h2>
+              <hr>
+            </div>
+              <p class="text-muted">Machine Learning (2 weeks):</p>
+                <ul>
+                  <li>Investigate and apply CNN including feature selection and classification</li>
+
+                  <li>Learn to Build and Train the Model with Features</li>
+
+                  <li>Save and Load the Trained Model</li>
+
+                  <li>Investigate alternative Pre-Trained model using Keras with VGG16 for feature selection and numpy library with euclidean distance algorithm for classification</li>
+                </ul>
+
+              <p class="text-muted">User Application (6 days):</p>
+                <ul>
+                  <li>Design and build application in Flask</li>
+                  <li>Create user functionalities such as picture upload, results prediction, and favorites.</li>
+                  <li>Database in PostgreSQL to retrieve results</li>
+                </ul>
+
+
+              <p class="text-muted">Visualization (4 days):</p>
+                <ul>
+                  <li>Visualize results from CNN prediction</li>
+                </ul>
+
+              <p class="text-muted">Team will iteratively complete each section together and git merge code within repository.
+              We will create new functionality such as a mobile option. 
+              </p>
+          </div>
+        </div>
       </div>
     </section>
+    <img src="static/img/plan.png" class="img-fluid" alt="Responsive image">
 
     <section class="cta">
       <div class="cta-content">
         <div class="container">
-          <h2>Welcome to Boston<br>Condo Combinations</h2>
-          <a href="{{ url_for('info') }}" class="btn btn-outline btn-xl js-scroll-trigger">Start!</a>
+                <p style="color:white">DATA SOURCES: Boston mls (market listing service) data provided by Zona Kostic at Harvard University</p>
         </div>
       </div>
       <div class="overlay"></div>
     </section>
 
-    <section class="contact bg-primary" id="contact">
-      <div class="container">
-        <h2>Contact</h2>
 
-          <p><a style="color:black" href="mailto:adam.shapiro595@gmail.com"> Adam Shapiro  </a> | <a style="color:black" href="mailto:frederec.im@gmail.com">  Fred Im </a></p>
 
-          <p><a style="color:black" href="https://faspeculator.herokuapp.com"> URL  </a> | <a style="color:black" href="https://github.com/fimhub/speculator">  GitHub </a></p>
+    <footer>
+      <div class="container"  id="contact">
+        <h2 style="color:white">Contact</h2>
+
+          <p><a style="color:white" href="mailto:adam.shapiro595@gmail.com"> Adam Shapiro  </a> | <a style="color:white" href="mailto:frederec.im@gmail.com">  Fred Im </a></p>
+
+          <p><a style="color:white" href="https://faspeculator.herokuapp.com"> URL  </a> | <a style="color:white" href="https://github.com/fimhub/speculator">  GitHub </a></p>
 
       </div>
-    </section>
-    <footer>
     </footer>
 
     <!-- Bootstrap core JavaScript -->
