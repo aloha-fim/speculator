@@ -89,14 +89,13 @@ def search():
         filtered = filtered.filter(Condo.listprice.between(priceMin, priceMax))
     if inputZip:
         filtered = filtered.filter(Condo.zip==inputZip)
-    mlsnums = [condo.mlsnum for condo in filtered.limit(50).all()]
+    mlsnums = [condo.mlsnum for condo in filtered.limit(20).all()]
 
     images = Photo.query.filter(Photo.mlsnum.in_(mlsnums)).all()
 
     closest = findClosest(photo, images)
     session['closest'] = closest
 
-    # we have no reason to save uploaded images
     return redirect(url_for('results'))
 
 @app.route('/results')
