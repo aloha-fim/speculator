@@ -1,4 +1,4 @@
-A Data Driven Web Application with Machine Learning in Keras to Image Search the Boston Real Estate Condo Market
+Data Driven Web Application with Machine Learning in Keras to Image Search the Boston Real Estate Condo Market
 ===
 ![picture](/img/glass.jpg)
 
@@ -55,7 +55,7 @@ USER NAVIGATION
 
 ![picture](/img/Readme1inputs.png)
 
-***User uploads image of condo to be compared***
+***User uploads image of condo to be processed for comparison***
 
 ![picture](/img/Readme2upload.png)
 
@@ -63,7 +63,7 @@ USER NAVIGATION
 
 ![picture](/img/Readme3results.png)
 
-***User is able to add or delete favorites in their account***
+***User is able to add or delete favorites from their account***
 
 ![picture](/img/screen4.png) 
 
