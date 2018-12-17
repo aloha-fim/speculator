@@ -51,16 +51,20 @@ CODE NAVIGATION
 USER NAVIGATION
 ---
 
-User inputs real estate data to filter search
+***User inputs real estate data to filter search***
+
 ![picture](/img/Readme1inputs.png)
 
-User uploads image of condo to be compared
+***User uploads image of condo to be compared***
+
 ![picture](/img/Readme2upload.png)
 
-User is able to obtain results of similar images with functionality to add to favorites page.
+***User is able to obtain results of similar images with functionality to add to favorites page***
+
 ![picture](/img/Readme3results.png)
 
-User is able to add or delete favorites in their account.
+***User is able to add or delete favorites in their account***
+
 ![picture](/img/Readme4favs.png) 
 
 
