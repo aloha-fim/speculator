@@ -13,29 +13,34 @@ Application
 
 - Postgres: SQL database
 
-This application will allow users to input condo images and output similar images by feature extraction from a pre-trained model using convolutional neural networks and then image retrieval using a classification algorithm. 
+This application will allow users to input condo images and output similar images by feature extraction from a pre-trained model using a convolutional neural network and retrieval classification algorithm. 
 
 
-URL:  http://faspeculator.herokuapp.com/
+URL:        http://faspeculator.herokuapp.com/
 
 Screencast: https://www.youtube.com/watch?v=2-ZgUKFmphw
 
-[GitHub Pages](https://github.com/fimhub/speculator/).
+Github:     [GitHub Pages](https://github.com/fimhub/speculator/)
 
 
 CODE NAVIGATION
 ---
-
-commands
-
-sql
-
-jupiter
-
-csv
-
-run
-
+'''
+1. Open .ipynb and run in Jupyter
+   - **condo.csv** (condo data) and **condo_images.csv** (picture array) are created
+'''
+'''
+2. Create database 'speculator_db' in Postgres 
+   - use **model.sql** to create tables and relationship
+'''
+'''
+3. Run scripts to import .csv files into Postgres
+   - use scripts **import_condos.py** and **import_images.py**
+'''
+'''
+4. Run Flask 
+   - python3 **routes.py** in command line
+'''
 
 USER NAVIGATION
 ---
