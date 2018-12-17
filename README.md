@@ -65,7 +65,7 @@ USER NAVIGATION
 
 ***User is able to add or delete favorites in their account***
 
-![picture](/img/Readme4favs.png) 
+![picture](/img/screen4.png) 
 
 
 
