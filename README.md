@@ -16,13 +16,13 @@ Application
 
 This application will allow users to input condo images and output similar images by feature extraction from a pre-trained model using a convolutional neural network and retrieval classification algorithm. 
 
-```
-URL:        http://faspeculator.herokuapp.com/
 
-Screencast: https://www.youtube.com/watch?v=2-ZgUKFmphw
+**URL**:        http://faspeculator.herokuapp.com/
 
-Github:     [GitHub Pages](https://github.com/fimhub/speculator/)
-```
+**Screencast**: https://www.youtube.com/watch?v=2-ZgUKFmphw
+
+**Github**:     [GitHub Pages](https://github.com/fimhub/speculator/)
+
 
 
 CODE NAVIGATION
@@ -59,7 +59,7 @@ USER NAVIGATION
 
 ![picture](/img/Readme2upload.png)
 
-***User is able to obtain results of similar images with functionality to add to favorites page***
+***User is able to obtain results of similar images, along with functionality to add to favorites page***
 
 ![picture](/img/Readme3results.png)
 
